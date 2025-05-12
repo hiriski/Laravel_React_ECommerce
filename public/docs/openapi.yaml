@@ -1,0 +1,382 @@
+openapi: 3.0.3
+info:
+  title: 'Laravel React ECommerce'
+  description: ''
+  version: 1.0.0
+servers:
+  -
+    url: 'http://localhost'
+tags:
+  -
+    name: Auth
+    description: ''
+  -
+    name: Endpoints
+    description: ''
+components:
+  securitySchemes:
+    default:
+      type: http
+      scheme: bearer
+      description: 'You can retrieve your token by visiting your dashboard and clicking <b>Generate API token</b>.'
+security:
+  -
+    default: []
+paths:
+  /api/auth/register:
+    post:
+      summary: 'Register with email & password'
+      operationId: registerWithEmailPassword
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: ''
+                  example: voluptas
+                  nullable: false
+                email:
+                  type: string
+                  description: 'Must be a valid email address.'
+                  example: rowe.reagan@example.com
+                  nullable: false
+                password:
+                  type: string
+                  description: ''
+                  example: "z7xH#J*[bT)S'+rM2zA"
+                  nullable: false
+                passwordConfirmation:
+                  type: string
+                  description: 'The value and <code>password</code> must match.'
+                  example: quo
+                  nullable: false
+              required:
+                - name
+                - email
+                - password
+                - passwordConfirmation
+  /api/auth/login-check-username:
+    post:
+      summary: 'Check username before login'
+      operationId: checkUsernameBeforeLogin
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  description: 'The <code>username</code> of an existing record in the users table.'
+                  example: accusamus
+                  nullable: false
+              required:
+                - username
+  /api/auth/login:
+    post:
+      summary: 'Login with email & password'
+      operationId: loginWithEmailPassword
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 'Must be a valid email address.'
+                  example: tmurphy@example.com
+                  nullable: false
+                password:
+                  type: string
+                  description: ''
+                  example: F);Q7fM
+                  nullable: false
+              required:
+                - email
+                - password
+  /api/auth/send-reset-password-link:
+    post:
+      summary: 'Send reset password link.'
+      operationId: sendResetPasswordLink
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 'Must be a valid email address. Must not be greater than 255 characters.'
+                  example: hill.dawn@example.net
+                  nullable: false
+                appId:
+                  type: string
+                  description: ''
+                  example: velit
+                  nullable: false
+              required:
+                - email
+                - appId
+  /api/auth/password-reset/verify:
+    post:
+      summary: 'Verify token password reset.'
+      operationId: verifyTokenPasswordReset
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+                  description: ''
+                  example: nam
+                  nullable: false
+                email:
+                  type: string
+                  description: 'Must be a valid email address. The <code>email</code> of an existing record in the users table.'
+                  example: hill.ryleigh@example.net
+                  nullable: false
+              required:
+                - token
+                - email
+  /api/auth/password-reset:
+    post:
+      summary: 'Reset password'
+      operationId: resetPassword
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+                  description: ''
+                  example: voluptas
+                  nullable: false
+                email:
+                  type: string
+                  description: 'Must be a valid email address. The <code>email</code> of an existing record in the users table.'
+                  example: grady.dooley@example.com
+                  nullable: false
+                password:
+                  type: string
+                  description: ''
+                  example: '/l+VD?ul4]k(?6oV85'
+                  nullable: false
+                passwordConfirmation:
+                  type: string
+                  description: 'The value and <code>password</code> must match.'
+                  example: animi
+                  nullable: false
+              required:
+                - token
+                - email
+                - password
+                - passwordConfirmation
+  /api/auth/revoke-token:
+    post:
+      summary: 'Revoke token from the database'
+      operationId: revokeTokenFromTheDatabase
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                currentAccessToken:
+                  type: string
+                  description: ''
+                  example: provident
+                  nullable: false
+              required:
+                - currentAccessToken
+  /api/auth/user:
+    get:
+      summary: 'Get authenticated user'
+      operationId: getAuthenticatedUser
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Auth
+  /api/auth/google/mobile:
+    post:
+      summary: 'Google sign in mobile'
+      operationId: googleSignInMobile
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                providerAccountId:
+                  type: string
+                  description: ''
+                  example: sed
+                  nullable: false
+                providerEmail:
+                  type: string
+                  description: 'Must be a valid email address.'
+                  example: gfranecki@example.com
+                  nullable: false
+                providerAccountName:
+                  type: string
+                  description: ''
+                  example: sapiente
+                  nullable: false
+                providerPhotoUrl:
+                  type: string
+                  description: ''
+                  example: 'https://torp.org/molestiae-aut-minima-voluptas-sed-eum.html'
+                  nullable: true
+                providerName:
+                  type: string
+                  description: ''
+                  example: nostrum
+                  nullable: false
+              required:
+                - providerAccountId
+                - providerEmail
+                - providerAccountName
+                - providerName
+  /api/v1/users:
+    get:
+      summary: 'Display a listing of the resource.'
+      operationId: displayAListingOfTheResource
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+    post:
+      summary: 'Store a newly created resource in storage.'
+      operationId: storeANewlyCreatedResourceInStorage
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+  '/api/v1/users/{user}':
+    get:
+      summary: 'Show the specified resource.'
+      operationId: showTheSpecifiedResource
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+    put:
+      summary: 'Update the specified resource in storage.'
+      operationId: updateTheSpecifiedResourceInStorage
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+    delete:
+      summary: 'Remove the specified resource from storage.'
+      operationId: removeTheSpecifiedResourceFromStorage
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+    parameters:
+      -
+        in: path
+        name: user
+        description: 'The user.'
+        example: magni
+        required: true
+        schema:
+          type: string
