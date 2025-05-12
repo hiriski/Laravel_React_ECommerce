@@ -147,6 +147,9 @@ return [
             // lang/
             'lang' => ['path' => 'lang', 'generate' => true],
 
+            // views
+            'views' => ['path' => 'resources/views', 'generate' => false],
+
             // routes/
             'routes' => ['path' => 'routes', 'generate' => true],
 
